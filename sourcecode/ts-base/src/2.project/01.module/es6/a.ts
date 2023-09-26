@@ -21,7 +21,7 @@ export { g as G }
 
 // 默认导出，无需函数名
 export default function () {
-    console.log("I'm default")
+    console.log("[a] I'm default")
 }
 
 // 引入外部模块，重新导出

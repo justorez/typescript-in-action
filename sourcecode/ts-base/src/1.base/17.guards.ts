@@ -14,18 +14,13 @@ class JavaScript {
     js: any
 }
 
+// 类型保护函数
 function isJava(lang: Java | JavaScript): lang is Java {
     return (lang as Java).helloJava !== undefined
 }
 
 function getLanguage(type: Type, x: string | number) {
     let lang = type === Type.Strong ? new Java() : new JavaScript();
-    
-    if (isJava(lang)) {
-        lang.helloJava();
-    } else {
-        lang.helloJavaScript();
-    }
 
     // if ((lang as Java).helloJava) {
     //     (lang as Java).helloJava();
@@ -33,10 +28,11 @@ function getLanguage(type: Type, x: string | number) {
     //     (lang as JavaScript).helloJavaScript();
     // }
 
+    // 类型保护
+
     // instanceof
     // if (lang instanceof Java) {
     //     lang.helloJava()
-    //     // lang.helloJavaScript()
     // } else {
     //     lang.helloJavaScript()
     // }
@@ -49,11 +45,17 @@ function getLanguage(type: Type, x: string | number) {
     // }
 
     // typeof
-    // if (typeof x === 'string') {
-    //     console.log(x.length)
-    // } else {
-    //     console.log(x.toFixed(2))
-    // }
+    if (typeof x === 'string') {
+        console.log(x.length)
+    } else {
+        console.log(x.toFixed(2))
+    }
+
+    if (isJava(lang)) {
+        lang.helloJava();
+    } else {
+        lang.helloJavaScript();
+    }
 
     return lang;
 }

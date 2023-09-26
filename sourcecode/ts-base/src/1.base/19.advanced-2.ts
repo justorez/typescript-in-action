@@ -1,3 +1,7 @@
+/**
+ * 索引类型
+ */
+
 let obj = {
     a: 1,
     b: 2,
@@ -18,9 +22,11 @@ interface Obj {
     a: number;
     b: string;
 }
-let key: keyof Obj
+let key: keyof Obj // let key: 'a' | 'b'
 
 // T[K]
 let value: Obj['a']
 
 // T extends U
+
+export default {}

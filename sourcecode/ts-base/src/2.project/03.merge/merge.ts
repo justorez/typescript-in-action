@@ -1,3 +1,7 @@
+/**
+ * 声明合并
+ */
+
 interface A {
     x: number;
     // y: string;
@@ -41,3 +45,5 @@ namespace Color {
     export function mix() {}
 }
 console.log(Color)
+
+export default {}

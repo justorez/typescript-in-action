@@ -1,4 +1,9 @@
-// T extends U ? X : Y
+/**
+ * 条件类型
+ * 
+ * 类型 T 是否可以被赋值给类型 U
+ * T extends U ? X : Y
+ */
 
 type TypeName<T> =
     T extends string ? "string" :
@@ -29,5 +34,5 @@ type T5 = NotNull<string | number | undefined | null>
 // Extract<T, U>
 type T6 = Extract<"a" | "b" | "c", "a" | "e">
 
-// ReturnType<T>
+// ReturnType<T>：获取函数返回值的类型
 type T8 = ReturnType<() => string>
