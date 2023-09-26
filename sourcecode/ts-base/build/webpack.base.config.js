@@ -9,6 +9,7 @@ module.exports = {
         app: './src/index.ts'
     },
     output: {
+        path: resolve('../dist'),
         filename: '[name].[chunkhash:8].js'
     },
     resolve: {
