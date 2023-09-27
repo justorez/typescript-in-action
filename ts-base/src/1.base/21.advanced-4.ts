@@ -4,12 +4,12 @@
  * 类型 T 是否可以被赋值给类型 U
  * T extends U ? X : Y
  */
-
 type TypeName<T> =
     T extends string ? "string" :
     T extends number ? "number" :
     T extends boolean ? "boolean" :
     T extends undefined ? "undefined" :
+    // eslint-disable-next-line @typescript-eslint/ban-types
     T extends Function ? "function" :
     "object";
 type T1 = TypeName<string>

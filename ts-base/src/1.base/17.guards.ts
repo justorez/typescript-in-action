@@ -20,7 +20,7 @@ function isJava(lang: Java | JavaScript): lang is Java {
 }
 
 function getLanguage(type: Type, x: string | number) {
-    let lang = type === Type.Strong ? new Java() : new JavaScript();
+    const lang = type === Type.Strong ? new Java() : new JavaScript();
 
     // if ((lang as Java).helloJava) {
     //     (lang as Java).helloJava();

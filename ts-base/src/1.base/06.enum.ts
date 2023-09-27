@@ -46,7 +46,7 @@ const enum Month {
     Apr = Month.Mar + 1,
     // May = () => 5
 }
-let month = [Month.Jan, Month.Feb, Month.Mar]
+const month = [Month.Jan, Month.Feb, Month.Mar]
 
 // 枚举类型
 enum E { a, b }
@@ -64,7 +64,7 @@ enum H { a = 'apple', b = 'banana' }
 // console.log(e1 === e2)
 // console.log(e1 === e3)
 
-let g1: G = G.a
-let g2: H.a = H.a
+const g1: G = G.a
+const g2: H.a = H.a
 console.log(g1, g2)
 // console.log(g1 === g2) // 不同枚举之间不能用于比较

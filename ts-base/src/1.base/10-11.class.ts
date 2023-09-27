@@ -25,7 +25,7 @@ class Dog extends Animal {
     }
 }
 console.log('Dog.prototype', Dog.prototype)
-let dog = new Dog('wangwang')
+const dog = new Dog('wangwang')
 // console.log(dog)
 // dog.pri()
 // dog.pro() // 无法通过实例访问保护属性
@@ -48,9 +48,9 @@ class Cat extends Animal {
         console.log('Cat sleep')
     }
 }
-let cat = new Cat()
+const cat = new Cat()
 
-let animals: Animal[] = [dog, cat]
+const animals: Animal[] = [dog, cat]
 animals.forEach(i => i.sleep()) // 多态示例
 
 class Workflow {

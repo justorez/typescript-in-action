@@ -25,7 +25,7 @@ interface Child {
 // 接口继承多接口
 interface Boy extends Man, Child {}
 
-let boy: Boy = {
+const boy: Boy = {
     name: '',
     run() {},
     eat() {},

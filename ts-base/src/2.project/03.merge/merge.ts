@@ -16,7 +16,7 @@ interface A {
     foo(bar: 'b'): string; // 1
 }
 
-let a: A = {
+const a: A = {
     x: 1,
     y: 2,
     foo(bar: any) {
@@ -26,13 +26,13 @@ let a: A = {
 
 class C {}
 namespace C {
-    export let state = 1
+    export const state = 1
 }
 console.log(C.state)
 
 function Lib() {}
 namespace Lib {
-    export let version = '1.0'
+    export const version = '1.0'
 }
 console.log(Lib.version)
 

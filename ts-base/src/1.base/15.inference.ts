@@ -1,8 +1,8 @@
 // 基本类型推断：从右到左
-let a = 1;
-let b = [1, null, 'a']
-let c = {x: 1, y: 'a'}
-let d = (x = 1) => x + 1
+const a = 1;
+const b = [1, null, 'a']
+const c = {x: 1, y: 'a'}
+const d = (x = 1) => x + 1
 
 // 上下文类型推断：从左到右
 window.onkeydown = (event) => {
@@ -14,7 +14,7 @@ interface Foo {
 }
 // let foo = {} as Foo // 类型断言，由用户推断类型
 // let foo = <Foo>{}
-let foo: Foo = {
+const foo: Foo = {
     bar: 1
 }
 // foo.bar = 1

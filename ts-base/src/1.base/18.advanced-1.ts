@@ -5,13 +5,13 @@ interface CatInterface {
     jump(): void
 }
 // 交叉类型：取类型的并集
-let pet: DogInterface & CatInterface = {
+const pet: DogInterface & CatInterface = {
     run() {},
     jump() {}
 }
 
 // 联合类型
-let a: number | string = 1
+const a: number | string = 1
 // 字面量类型：限定具体的取值
 let b: 'a' | 'b' | 'c'
 let c: 1 | 2 | 3
@@ -26,7 +26,7 @@ class Cat  implements CatInterface {
 }
 enum Master { Boy, Girl }
 function getPet(master: Master) {
-    let pet = master === Master.Boy ? new Dog() : new Cat();
+    const pet = master === Master.Boy ? new Dog() : new Cat();
     // pet.run()
     // pet.jump()
     pet.eat()

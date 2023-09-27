@@ -1,9 +1,9 @@
 // 单独导出
-export let a = 1
+export const a = 1
 
 // 批量导出
-let b = 2
-let c = 3
+const b = 2
+const c = 3
 export { b, c }
 
 // 导出接口

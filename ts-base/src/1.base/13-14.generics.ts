@@ -25,9 +25,9 @@ class Log<T> {
         return value
     }
 }
-let log1 = new Log<number>()
+const log1 = new Log<number>()
 log1.run(1)
-let log2 = new Log()
+const log2 = new Log()
 log2.run({ a: 1 })
 
 interface Length {

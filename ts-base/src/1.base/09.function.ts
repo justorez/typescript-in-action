@@ -32,7 +32,7 @@ console.log(add7(1, 2, 3, 4, 5))
 function add8(...rest: number[]): number
 function add8(...rest: string[]): string
 function add8(...rest: any[]) {
-    let first = rest[0]
+    const first = rest[0]
     if (typeof first === 'number') {
         return rest.reduce((pre, cur) => pre + cur)
     }

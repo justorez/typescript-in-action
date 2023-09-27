@@ -16,7 +16,7 @@ function render(result: Result) {
         // value.id++ // 只读属性不允许修改
     })
 }
-let result = {
+const result = {
     data: [
         { id: 1, name: 'A', sex: 'male' },
         { id: 2, name: 'B', age: 10 }
@@ -27,10 +27,10 @@ render(result)
 interface StringArray {
     [index: number]: string
 }
-let chars: StringArray = ['a', 'b']
+const chars: StringArray = ['a', 'b']
 
 interface Names {
-    [x: string]: any
+    [x: string]: unknown
     // y: number;
     [z: number]: number
 }
@@ -42,7 +42,7 @@ interface Names {
 // }
 // 使用类型别名定义函数
 type Add = (x: number, y: number) => number
-let add: Add = (a: number, b: number) => a + b
+const add: Add = (a: number, b: number) => a + b
 
 interface Lib {
     (): void
@@ -51,14 +51,14 @@ interface Lib {
 }
 
 function getLib() {
-    let lib = (() => {}) as Lib
+    const lib = (() => {}) as Lib
     lib.version = '1.0.0'
     lib.doSomething = () => {
         console.log('do something by lib', lib.version)
     }
     return lib
 }
-let lib1 = getLib()
+const lib1 = getLib()
 lib1()
-let lib2 = getLib()
+const lib2 = getLib()
 lib2.doSomething()

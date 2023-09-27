@@ -5,7 +5,7 @@
  * 函数之间兼容：参数多的兼容参数少的
  */
 
-let s: string = 'a'
+const s: string = 'a'
 // str = null
 
 // 接口兼容性
@@ -20,7 +20,7 @@ interface Y {
     c: any;
 }
 let x: X = {a: 1, b: 2}
-let y: Y = {a: 1, b: 2, c: 3}
+const y: Y = {a: 1, b: 2, c: 3}
 x = y
 // y = x
 
@@ -31,14 +31,14 @@ function hof(handler: Handler) {
 }
 
 // 1)参数个数
-let handler1 = (a: number) => {}
+const handler1 = (a: number) => {}
 hof(handler1)
-let handler2 = (a: number, b: number, c: number) => {}
+const handler2 = (a: number, b: number, c: number) => {}
 // hof(handler2) // 源函数参数必须少于等于目标函数
 
 // 可选参数和剩余参数
 let a = (p1: number, p2: number) => {}
-let b = (p1?: number, p2?: number) => {}
+const b = (p1?: number, p2?: number) => {}
 let c = (...args: number[]) => {}
 a = b
 a = c
@@ -48,7 +48,7 @@ c = a
 c = b
 
 // 2)参数类型
-let handler3 = (a: string) => {}
+const handler3 = (a: string) => {}
 // hof(handler3) // 参数类型必须匹配
 
 interface Point3D {
@@ -63,13 +63,13 @@ interface Point2D {
 // 此处可以把接口分别看成三个参数和两个参数
 // 故适用上述函数参数个数的兼容规则，参数多兼容参数少的
 let p3d = (point: Point3D) => {}
-let p2d = (point: Point2D) => {}
+const p2d = (point: Point2D) => {}
 p3d = p2d
 // p2d = p3d
 
 // 3) 返回值类型
 let f = () => ({name: 'Alice'})
-let g = () => ({name: 'Alice', location: 'Beijing'})
+const g = () => ({name: 'Alice', location: 'Beijing'})
 f = g
 // g = f // 返回值类型要求相同或者是子类型
 
@@ -85,7 +85,7 @@ function overload(a: any, b: any): any {}
 enum Fruit { Apple, Banana }
 enum Color { Red, Yellow }
 // let fruit: Fruit.Apple = 1 // 枚举和数字类型也不再兼容
-let no: number = Fruit.Apple
+const no: number = Fruit.Apple
 // let color: Color.Red = Fruit.Apple
 
 // 类兼容性
@@ -102,7 +102,7 @@ class B {
     private name: string = ''
 }
 let aa = new A(1, 2)
-let bb = new B(1)
+const bb = new B(1)
 // aa = bb
 // bb = aa
 class C extends A {}
@@ -116,14 +116,14 @@ interface Empty<T> {
     // value: T
 }
 let obj1: Empty<number> = {};
-let obj2: Empty<string> = {};
+const obj2: Empty<string> = {};
 obj1 = obj2
 
 let log1 = <T>(x: T): T => {
     console.log('x')
     return x
 }
-let log2 = <U>(y: U): U => {
+const log2 = <U>(y: U): U => {
     console.log('y')
     return y
 }

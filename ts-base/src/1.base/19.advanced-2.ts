@@ -2,7 +2,7 @@
  * 索引类型
  */
 
-let obj = {
+const obj = {
     a: 1,
     b: 2,
     c: 3
