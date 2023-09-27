@@ -13,8 +13,10 @@
   "devDependencies": {
     "@types/jquery": "^3.5.19",
     "@types/node": "^20.7.0",
+    "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
     "html-webpack-plugin": "^5.5.3",
     "ts-loader": "^9.4.4",
     "typescript": "^5.2.2",
