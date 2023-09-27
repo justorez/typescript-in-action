@@ -1,10 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
     entry: {
         'app': './src/index.tsx'
     },
     output: {
+        path: path.resolve(__dirname, '../dist'),
         filename: '[name].[chunkhash:8].js'
     },
     resolve: {
