@@ -8,4 +8,4 @@ test('sub: 1 - 2 = -1', () => {
     expect(math.sub(1, 2)).toBe(-1);
 });
 
-// let x: number = '1'
+// let x: number = '1' // babel-jest 不会进行类型检查

@@ -10,4 +10,4 @@ describe('Test TS Functions', () => {
     })
 })
 
-// let x: number = '1'
+// let x: number = '1' // ts-jest 会进行类型检查
