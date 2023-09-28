@@ -9,6 +9,7 @@ interface Greeting {
 
 const Hello = (props: Greeting) => <Button>Hello {props.name}</Button>
 
+// 不建议使用 React.FC
 // const Hello: React.FC<Greeting> = ({
 //     name,
 //     firstName,

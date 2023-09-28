@@ -1,3 +1,14 @@
+body {
+    margin: 0;
+    height: 100vh;
+}
+#root {
+    height: 100%;
+}
+
+.layout {
+    height: 100%;
+}
 .menu {
     line-height: 64px;
 }
@@ -5,9 +16,10 @@
     padding: 0 50px;
 }
 .content {
-    background: #fff;
     padding: 24px;
+    height: 100%;
     min-height: 480px;
+    background-color: #fff;
 }
 .footer {
     text-align: center;

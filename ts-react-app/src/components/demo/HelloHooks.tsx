@@ -1,26 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'antd';
+import { useState, useEffect } from 'react'
+import { Button } from 'antd'
 
 interface Greeting {
-    name: string;
-    firstName: string;
-    lastName: string;
+    name: string
+    firstName: string
+    lastName: string
 }
 
 const HelloHooks = (props: Greeting) => {
-    const [count, setCount] = useState(0);
-    const [text, setText] = useState<string | null>(null);
+    const [count, setCount] = useState(0)
+    const [text, setText] = useState<string | null>(null)
 
     useEffect(() => {
         if (count > 5) {
-            setText('休息一下');
+            setText('休息一下')
         }
-    }, [count]);
+    }, [count])
 
     return (
         <>
-            <p>你点击了 {count} 次 {text}</p>
-            <Button onClick={() => {setCount(count + 1)}}>
+            <p>
+                你点击了 {count} 次 {text}
+            </p>
+            <Button
+                onClick={() => {
+                    setCount(count + 1)
+                }}
+            >
                 Hello {props.name}
             </Button>
         </>
@@ -32,4 +38,4 @@ HelloHooks.defaultProps = {
     lastName: ''
 }
 
-export default HelloHooks;
+export default HelloHooks

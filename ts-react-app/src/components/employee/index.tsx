@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import { Component } from 'react';
 import { Table } from 'antd';
 
 import './index.css';

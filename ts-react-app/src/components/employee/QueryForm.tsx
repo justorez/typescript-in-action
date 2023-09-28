@@ -1,6 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import type { FormProps } from 'antd';
 
 import { get } from '../../utils/request';
 import { GET_EMPLOYEE_URL } from '../../constants/urls';
@@ -8,7 +8,7 @@ import { EmployeeRequest, EmployeeResponse } from '../../interface/employee';
 
 const { Option } = Select;
 
-interface Props extends FormComponentProps {
+interface Props extends FormProps {
     onDataChange(data: EmployeeResponse): void
 }
 
@@ -133,8 +133,11 @@ class QueryForm extends Component<Props, EmployeeRequest> {
     }
 }
 
-const WrapQueryForm = Form.create<Props>({
-    name: 'employee_query'
-})(QueryForm);
+// v3 的用法，已弃用
+// const WrapQueryForm = Form.create<Props>({
+//     name: 'employee_query'
+// })(QueryForm);
 
-export default WrapQueryForm;
+// export default WrapQueryForm;
+
+export default QueryForm

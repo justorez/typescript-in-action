@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Component } from 'react'
+import { Button } from 'antd'
 
 interface Greeting {
-    name: string;
-    firstName?: string;
-    lastName?: string;
+    name: string
+    firstName?: string
+    lastName?: string
 }
 
 interface HelloState {
@@ -23,7 +23,11 @@ class HelloClass extends Component<Greeting, HelloState> {
         return (
             <>
                 <p>你点击了 {this.state.count} 次</p>
-                <Button onClick={() => {this.setState({count: this.state.count + 1})}}>
+                <Button
+                    onClick={() => {
+                        this.setState({ count: this.state.count + 1 })
+                    }}
+                >
                     Hello {this.props.name}
                 </Button>
             </>
@@ -31,4 +35,4 @@ class HelloClass extends Component<Greeting, HelloState> {
     }
 }
 
-export default HelloClass;
+export default HelloClass
