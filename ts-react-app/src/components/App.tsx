@@ -22,11 +22,11 @@ const items: MenuProps['items'] = [
 
 const App = () => {
     const defaultKey = useLocation().pathname || 'employee'
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     
     const onClickMenu: MenuProps['onClick'] = (e) => {
         // navigate(e.key)
-        console.log(e)
+        // console.log(e)
     }
 
     return (

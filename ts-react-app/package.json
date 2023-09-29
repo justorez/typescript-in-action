@@ -20,7 +20,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "lint": "eslint --ext .ts,.tsx src",
     "test": "react-app-rewired test",
@@ -51,6 +51,7 @@
     "customize-cra": "^1.0.0",
     "http-proxy-middleware": "^2.0.6",
     "http-server": "^14.1.1",
-    "react-app-rewired": "^2.2.1"
+    "react-app-rewired": "^2.2.1",
+    "webpack-dev-server": "^4.15.1"
   }
 }

@@ -1,18 +1,26 @@
-import React, { Component } from 'react';
-import HelloClass from './HelloClass';
+import React from 'react'
+import HelloClass from './HelloClass'
 
 interface Loading {
     loading: boolean
 }
 
 function HelloHOC<P>(WrappedComponent: React.ComponentType<P>) {
-    return class extends Component<P & Loading> {
+    return class extends React.Component<P & Loading> {
         render() {
-            // const { loading, ...props } = this.props;
-            return <div>loading...</div>
-            // </div>return loading ? <div>Loading...</div> : <WrappedComponent { ...props as P } />;
+            return this.props.loading 
+                ? <div>loading...</div>
+                : <WrappedComponent { ...this.props } />
         }
     }
 }
 
-export default HelloHOC(HelloClass);
+// function HelloHOC<P>(WrappedComponent: React.ComponentType<P>) {
+//     return (props: P & Loading): React.JSX.Element => {
+//         return props.loading
+//             ? <div>loading...</div>
+//             : <WrappedComponent { ...props } />
+//     }
+// }
+
+export default HelloHOC(HelloClass)

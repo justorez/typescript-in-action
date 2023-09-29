@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Select, Button } from 'antd';
 import type { FormProps } from 'antd';
 
@@ -13,102 +13,42 @@ interface Props extends FormProps {
 }
 
 // Hooks version
-// const QueryFormHooks = (props: Props) => {
-//     const [name, setName] = useState('');
-//     const [departmentId, setDepartmentId] = useState<number | undefined>();
+const QueryFormHooks = (props: Props) => {
+    const [name, setName] = useState('');
+    const [departmentId, setDepartmentId] = useState<number | undefined>();
 
-//     const handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-//         setName(e.currentTarget.value)
-//     }
-
-//     const handleDepartmentChange = (value: number) => {
-//         setDepartmentId(value)
-//     }
-
-//     const handleSubmit = () => {
-//         queryEmployee({name, departmentId});
-//     }
-
-//     const queryEmployee = (param: EmployeeRequest) => {
-//         get(GET_EMPLOYEE_URL, param).then(res => {
-//             props.onDataChange(res.data);
-//         });
-//     }
-
-//     useEffect(() => {
-//         queryEmployee({name, departmentId});
-//     }, [])
-
-//     return (
-//         <>
-//             <Form layout="inline">
-//                 <Form.Item>
-//                     <Input
-//                         placeholder="姓名"
-//                         style={{ width: 120 }}
-//                         allowClear
-//                         value={name}
-//                         onChange={handleNameChange}
-//                     />
-//                 </Form.Item>
-//                 <Form.Item>
-//                 <Select
-//                     placeholder="部门"
-//                     style={{ width: 120 }}
-//                     allowClear
-//                     value={departmentId}
-//                     onChange={handleDepartmentChange}
-//                 >
-//                     <Option value={1}>技术部</Option>
-//                     <Option value={2}>产品部</Option>
-//                     <Option value={3}>市场部</Option>
-//                     <Option value={4}>运营部</Option>
-//                 </Select>
-//                 </Form.Item>
-//                 <Form.Item>
-//                     <Button type="primary" onClick={handleSubmit}>查询</Button>
-//                 </Form.Item>
-//             </Form>
-//         </>
-//     )
-// }
-
-class QueryForm extends Component<Props, EmployeeRequest> {
-    state: EmployeeRequest = {
-        name: '',
-        departmentId: undefined
+    const handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+        setName(e.currentTarget.value)
     }
-    handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-        this.setState({
-            name: e.currentTarget.value
-        });
+
+    const handleDepartmentChange = (value: number) => {
+        setDepartmentId(value)
     }
-    handleDepartmentChange = (value: number) => {
-        this.setState({
-            departmentId: value
-        });
+
+    const handleSubmit = () => {
+        queryEmployee({name, departmentId});
     }
-    handleSubmit = () => {
-        this.queryEmployee(this.state);
+
+    const queryEmployee = async (param: EmployeeRequest) => {
+        const res = await get(GET_EMPLOYEE_URL, param)
+        props.onDataChange(res.data)
     }
-    componentDidMount() {
-        this.queryEmployee(this.state);
-    }
-    queryEmployee(param: EmployeeRequest) {
-        get(GET_EMPLOYEE_URL, param).then(res => {
-            this.props.onDataChange(res.data);
-        });
-    }
-    render() {
-        return (
+
+    // 页面初始化，查询数据
+    useEffect(() => {
+        queryEmployee({name, departmentId});
+    }, [])
+
+    return (
+        <>
             <Form layout="inline">
                 <Form.Item>
                     <Input
                         placeholder="姓名"
                         style={{ width: 120 }}
                         allowClear
-                        value={this.state.name}
-                        onChange={this.handleNameChange}
+                        value={name}
+                        onChange={handleNameChange}
                     />
                 </Form.Item>
                 <Form.Item>
@@ -116,8 +56,8 @@ class QueryForm extends Component<Props, EmployeeRequest> {
                     placeholder="部门"
                     style={{ width: 120 }}
                     allowClear
-                    value={this.state.departmentId}
-                    onChange={this.handleDepartmentChange}
+                    value={departmentId}
+                    onChange={handleDepartmentChange}
                 >
                     <Option value={1}>技术部</Option>
                     <Option value={2}>产品部</Option>
@@ -126,12 +66,75 @@ class QueryForm extends Component<Props, EmployeeRequest> {
                 </Select>
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" onClick={this.handleSubmit}>查询</Button>
+                    <Button type="primary" onClick={handleSubmit}>查询</Button>
                 </Form.Item>
             </Form>
-        )
-    }
+        </>
+    )
 }
+
+export default QueryFormHooks
+
+// class QueryForm extends React.Component<Props, EmployeeRequest> {
+//     state: EmployeeRequest = {
+//         name: '',
+//         departmentId: undefined
+//     }
+//     handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+//         this.setState({
+//             name: e.currentTarget.value
+//         });
+//     }
+//     handleDepartmentChange = (value: number) => {
+//         this.setState({
+//             departmentId: value
+//         });
+//     }
+//     handleSubmit = () => {
+//         this.queryEmployee(this.state);
+//     }
+//     componentDidMount() {
+//         this.queryEmployee(this.state);
+//     }
+//     queryEmployee(param: EmployeeRequest) {
+//         get(GET_EMPLOYEE_URL, param).then(res => {
+//             this.props.onDataChange(res.data);
+//         });
+//     }
+//     render() {
+//         return (
+//             <Form layout="inline">
+//                 <Form.Item>
+//                     <Input
+//                         placeholder="姓名"
+//                         style={{ width: 120 }}
+//                         allowClear
+//                         value={this.state.name}
+//                         onChange={this.handleNameChange}
+//                     />
+//                 </Form.Item>
+//                 <Form.Item>
+//                 <Select
+//                     placeholder="部门"
+//                     style={{ width: 120 }}
+//                     allowClear
+//                     value={this.state.departmentId}
+//                     onChange={this.handleDepartmentChange}
+//                 >
+//                     <Option value={1}>技术部</Option>
+//                     <Option value={2}>产品部</Option>
+//                     <Option value={3}>市场部</Option>
+//                     <Option value={4}>运营部</Option>
+//                 </Select>
+//                 </Form.Item>
+//                 <Form.Item>
+//                     <Button type="primary" onClick={this.handleSubmit}>查询</Button>
+//                 </Form.Item>
+//             </Form>
+//         )
+//     }
+// }
+// export default QueryForm
 
 // v3 的用法，已弃用
 // const WrapQueryForm = Form.create<Props>({
@@ -140,4 +143,3 @@ class QueryForm extends Component<Props, EmployeeRequest> {
 
 // export default WrapQueryForm;
 
-export default QueryForm

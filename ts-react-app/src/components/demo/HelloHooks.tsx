@@ -23,9 +23,7 @@ const HelloHooks = (props: Greeting) => {
                 你点击了 {count} 次 {text}
             </p>
             <Button
-                onClick={() => {
-                    setCount(count + 1)
-                }}
+                onClick={() => setCount(count + 1)}
             >
                 Hello {props.name}
             </Button>
