@@ -16,15 +16,16 @@
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
-    "html-webpack-plugin": "^3.2.0",
-    "ts-loader": "^6.0.2",
-    "typescript": "^3.5.1",
+    "html-webpack-plugin": "^5.5.3",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
     "vue-loader": "^15.7.1",
+    "vue-style-loader": "^4.1.3",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.5.1",
-    "webpack-merge": "^4.2.1"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
   },
   "dependencies": {
     "vue": "^2.6.10",

@@ -1,3 +1,4 @@
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -6,6 +7,7 @@ module.exports = {
         'app': './src/index.ts'
     },
     output: {
+        path: path.resolve(__dirname, '../dist'),
         filename: '[name].[chunkhash:8].js'
     },
     resolve: {
