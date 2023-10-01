@@ -1,143 +1,116 @@
-import { Dispatch } from 'redux';
-import _ from 'lodash';
+import _ from 'lodash'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { get, post } from '../../utils/request';
-import { department, level } from '../../constants/options';
+import { RootState } from '../store'
+import { get, post } from '../../utils/request'
+import { department, level } from '../../constants/options'
 
 import {
     GET_EMPLOYEE_URL,
     CREATE_EMPLOYEE_URL,
     DELETE_EMPLOYEE_URL,
     UPDATE_EMPLOYEE_URL
-} from '../../constants/urls';
+} from '../../constants/urls'
 
 import {
     GET_EMPLOYEE,
     CREATE_EMPLOYEE,
     DELETE_EMPLOYEE,
     UPDATE_EMPLOYEE
-} from '../../constants/actions';
+} from '../../constants/actions'
 
 import {
     EmployeeInfo,
     EmployeeRequest,
-    EmployeeResponse,
     CreateRequest,
     DeleteRequest,
     UpdateRequest
-} from '../../interface/employee';
+} from '../../interface/employee'
 
-type State = Readonly<{
-    employeeList: EmployeeResponse
-}>
-
-type Action = {
-    type: string;
-    payload: any;
+export interface EmployeeState {
+    employeeList: EmployeeInfo[]
 }
 
-const initialState: State = {
-    employeeList: undefined
+const initialState: EmployeeState = {
+    employeeList: []
 }
 
-export function getEmployee(param: EmployeeRequest, callback: () => void) {
-    return (dispatch: Dispatch) => {
-        get(GET_EMPLOYEE_URL, param).then(res => {
-            dispatch({
-                type: GET_EMPLOYEE,
-                payload: res.data
-            });
-            callback();
-        });
+export const getEmployeeAsync = createAsyncThunk(
+    GET_EMPLOYEE,
+    async (param: EmployeeRequest) => {
+        const res = await get(GET_EMPLOYEE_URL, param)
+        return res.data
     }
-}
+)
 
-export function createEmployee(param: CreateRequest, callback: () => void) {
-    return (dispatch: Dispatch) => {
-        post(CREATE_EMPLOYEE_URL, param).then(res => {
-            dispatch({
-                type: CREATE_EMPLOYEE,
-                payload: {
-                    name: param.name,
-                    department: department[param.departmentId],
-                    departmentId: param.departmentId,
-                    hiredate: param.hiredate,
-                    level: level[param.levelId],
-                    levelId: param.levelId,
-                    ...res.data
-                }
-            });
-            callback();
-        });
+export const createEmployeeAsync = createAsyncThunk(
+    CREATE_EMPLOYEE,
+    async (param: CreateRequest) => {
+        const res = await post(CREATE_EMPLOYEE_URL, param)
+        return {
+            name: param.name,
+            department: department[param.departmentId],
+            departmentId: param.departmentId,
+            hiredate: param.hiredate,
+            level: level[param.levelId],
+            levelId: param.levelId,
+            ...res.data
+        }
     }
-}
+)
 
-export function deleteEmployee(param: DeleteRequest) {
-    return (dispatch: Dispatch) => {
-        post(DELETE_EMPLOYEE_URL, param).then(res => {
-            dispatch({
-                type: DELETE_EMPLOYEE,
-                payload: param.id
+export const deleteEmployeeAsync = createAsyncThunk(
+    DELETE_EMPLOYEE,
+    async (param: DeleteRequest) => {
+        await post(DELETE_EMPLOYEE_URL, param)
+        return param.id
+    }
+)
+
+export const updateEmployeeAsync = createAsyncThunk(
+    UPDATE_EMPLOYEE,
+    async (param: UpdateRequest) => {
+        await post(UPDATE_EMPLOYEE_URL, param)
+        return param
+    }
+)
+
+export const employeeSlice = createSlice({
+    name: 'employee',
+    initialState,
+    reducers: {},
+    extraReducers(builder) {
+        builder
+            .addCase(getEmployeeAsync.fulfilled, (state, action) => {
+                state.employeeList = action.payload
             })
-        });
+            .addCase(createEmployeeAsync.fulfilled, (state, action) => {
+                state.employeeList = [action.payload, ...state.employeeList]
+            })
+            .addCase(deleteEmployeeAsync.fulfilled, (state, action) => {
+                let reducedList = [...state.employeeList]
+                _.remove(reducedList, (item) => item.id === action.payload)
+                state.employeeList = reducedList
+            })
+            .addCase(updateEmployeeAsync.fulfilled, (state, action) => {
+                let updatedList = [...state.employeeList]
+                const item = action.payload
+                const index = _.findIndex(updatedList, { id: item.id })
+                updatedList[index] = {
+                    id: item.id,
+                    key: item.id,
+                    name: item.name,
+                    department: department[item.departmentId],
+                    departmentId: item.departmentId,
+                    hiredate: item.hiredate,
+                    level: level[item.levelId],
+                    levelId: item.levelId
+                }
+                state.employeeList = updatedList
+            })
     }
-}
+})
 
-export function updateEmployee(param: UpdateRequest, callback: () => void) {
-    return (dispatch: Dispatch) => {
-        post(UPDATE_EMPLOYEE_URL, param).then(res => {
-            dispatch({
-                type: UPDATE_EMPLOYEE,
-                payload: param
-            });
-            callback();
-        });
-    }
-}
+export const selectEmployeeList = (state: RootState) => state.employee.employeeList
 
-export default function(state = initialState, action: Action) {
-    switch (action.type) {
-        case GET_EMPLOYEE:
-            return {
-                ...state,
-                employeeList: action.payload
-            }
-        case CREATE_EMPLOYEE:
-            let newList = [action.payload, ...(state.employeeList as EmployeeInfo[])]
-            return {
-                ...state,
-                employeeList: newList
-            }
-        case DELETE_EMPLOYEE:
-            let reducedList = [...(state.employeeList as EmployeeInfo[])];
-            _.remove(reducedList, (item: EmployeeInfo) => {
-                return item.id === action.payload
-            });
-            return {
-                ...state,
-                employeeList: reducedList
-            }
-        case UPDATE_EMPLOYEE:
-            let updatedList = [...(state.employeeList as EmployeeInfo[])];
-            let item: UpdateRequest = action.payload;
-            let index = _.findIndex(updatedList, {
-                id: item.id
-            });
-            updatedList[index] = {
-                id: item.id,
-                key: item.id,
-                name: item.name,
-                department: department[item.departmentId],
-                departmentId: item.departmentId,
-                hiredate: item.hiredate,
-                level: level[item.levelId],
-                levelId: item.levelId
-            }
-            return {
-                ...state,
-                employeeList: updatedList
-            }
-        default:
-            return state
-    }
-}
+export default employeeSlice.reducer

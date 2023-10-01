@@ -1,12 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom'
+import App from '../components/App'
 
-import App from '../components/App';
+const router = createBrowserRouter([
+    {
+        path: '*',
+        element: <App/>
+    }
+])
 
-const Root = () => (
-    <BrowserRouter>
-        <Route path="/*" component={App}/>
-    </BrowserRouter>
-)
-
-export default Root;
+export default router

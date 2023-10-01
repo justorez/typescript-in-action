@@ -21,7 +21,7 @@ const items: MenuProps['items'] = [
 ]
 
 const App = () => {
-    const defaultKey = useLocation().pathname || 'employee'
+    const defaultKey = useLocation().pathname?.replace('/', '') || 'employee'
     // const navigate = useNavigate()
     
     const onClickMenu: MenuProps['onClick'] = (e) => {
