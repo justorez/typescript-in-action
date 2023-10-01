@@ -44,9 +44,9 @@ export default function Employee() {
         setRowData({})
     }
     const handleUpdate = (record: EmployeeInfo) => {
+        setRowData(record)
         setShowModal(true)
         setEdit(true)
-        setRowData(record)
     }
     const handleDelete = (param: DeleteRequest) => dispatch(deleteEmployeeAsync(param))
     const handleDownload = () => window.open(DOWNLOAD_EMPLOYEE_URL)

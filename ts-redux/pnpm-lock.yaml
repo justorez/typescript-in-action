@@ -17,10 +17,10 @@ specifiers:
   axios: ^1.5.1
   babel-plugin-import: ^1.13.8
   customize-cra: ^1.0.0
+  dayjs: ^1.11.10
   http-proxy-middleware: ^2.0.6
   http-server: ^14.1.1
   lodash: ^4.17.21
-  moment: ^2.29.4
   react: ^18.2.0
   react-app-rewired: ^2.2.1
   react-dom: ^18.2.0
@@ -41,10 +41,10 @@ dependencies:
   '@types/node': 18.18.1
   '@types/react': 18.2.23
   '@types/react-dom': 18.2.8
-  antd: 5.9.4_jb42yyeu5qxbfieyxjks6malva
+  antd: 5.9.4_biqbaboplfbrettd7655fr4n2y
   axios: 1.5.1
+  dayjs: 1.11.10
   lodash: 4.17.21
-  moment: 2.29.4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.1.2_w2t4jfowrdz4rm4uaz5cwoqleu
@@ -3020,7 +3020,7 @@ packages:
     resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
     engines: {node: '>=10'}
 
-  /antd/5.9.4_jb42yyeu5qxbfieyxjks6malva:
+  /antd/5.9.4_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-eyNn1C/Q9ESn4ktfTlRIIXBbWT5L/Rr38xP37dIvJ3FeD/a4vaVcMqqLz5ywwMPKxgWnuUxggo1mJwWdPoIdSg==}
     peerDependencies:
       react: '>=16.9.0'
@@ -3055,7 +3055,7 @@ packages:
       rc-motion: 2.9.0_biqbaboplfbrettd7655fr4n2y
       rc-notification: 5.1.1_biqbaboplfbrettd7655fr4n2y
       rc-pagination: 3.6.1_biqbaboplfbrettd7655fr4n2y
-      rc-picker: 3.14.4_uva2qcxjvvgtag3ktuxfbuvnfq
+      rc-picker: 3.14.4_pedp7nuen4qe3hor44k523wkfi
       rc-progress: 3.5.1_biqbaboplfbrettd7655fr4n2y
       rc-rate: 2.12.0_biqbaboplfbrettd7655fr4n2y
       rc-resize-observer: 1.3.1_biqbaboplfbrettd7655fr4n2y
@@ -6849,10 +6849,6 @@ packages:
     dependencies:
       minimist: 1.2.8
 
-  /moment/2.29.4:
-    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
-    dev: false
-
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
 
@@ -8316,7 +8312,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /rc-picker/3.14.4_uva2qcxjvvgtag3ktuxfbuvnfq:
+  /rc-picker/3.14.4_pedp7nuen4qe3hor44k523wkfi:
     resolution: {integrity: sha512-5jGhDglT7i2Qv3CfO4LyMp7unhQ1t/IFNO2T+8Iv1k1FYD0hW0ejqCl+rZNFP6vSLzOW9oVcHVy5SEllhYgR+Q==}
     engines: {node: '>=8.x'}
     peerDependencies:
@@ -8340,7 +8336,6 @@ packages:
       '@rc-component/trigger': 1.17.0_biqbaboplfbrettd7655fr4n2y
       classnames: 2.3.2
       dayjs: 1.11.10
-      moment: 2.29.4
       rc-util: 5.37.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

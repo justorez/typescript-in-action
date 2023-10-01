@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { Modal, Form, Input, Select, DatePicker } from 'antd';
 import type { FormProps } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import _ from 'lodash';
 
 import { EmployeeInfo, CreateRequest, UpdateRequest } from '../../interface/employee';
 
@@ -50,8 +51,9 @@ class InfoModal extends Component<Props, State> {
         });
     }
     render() {
-        let title = this.props.edit ? '编辑' : '添加新员工';
-        let { name, departmentId, hiredate, levelId } = this.props.rowData;
+        const title = this.props.edit ? '编辑' : '添加新员工'
+        const rowData = _.omit(this.props.rowData, ['hiredate'])
+        const hiredate = this.props.rowData.hiredate
         
         return (
             <Modal
@@ -62,9 +64,9 @@ class InfoModal extends Component<Props, State> {
                 confirmLoading={this.state.confirmLoading}
                 destroyOnClose={true}
             >
-                <Form>
+                <Form preserve={false} initialValues={rowData}>
                     <Form.Item
-                        initialValue={name}
+                        name="name"
                         rules={[{ required: true, whitespace: true, message: '请输入姓名' }]}
                     >
                         <Input
@@ -75,7 +77,7 @@ class InfoModal extends Component<Props, State> {
                         />
                     </Form.Item>
                     <Form.Item
-                        initialValue={departmentId}
+                        name="departmentId"
                         rules={[{ required: true, message: '请选择部门' }]}
                     >
                         <Select
@@ -90,7 +92,8 @@ class InfoModal extends Component<Props, State> {
                         </Select>
                     </Form.Item>
                     <Form.Item
-                        initialValue={hiredate ? moment(hiredate) : undefined}
+                        name="hiredate"
+                        initialValue={hiredate ? dayjs(hiredate) : undefined}
                         rules={[{ required: true, message: '请选择入职日期' }]}
                     >
                         <DatePicker
@@ -99,7 +102,7 @@ class InfoModal extends Component<Props, State> {
                         />
                     </Form.Item>
                     <Form.Item
-                        initialValue={levelId}
+                        name="levelId"
                         rules={[{ required: true, message: '请选择职级' }]}
                     >
                         <Select

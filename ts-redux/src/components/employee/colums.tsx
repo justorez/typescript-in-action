@@ -31,23 +31,19 @@ const getColunms = (
         {
             title: '操作',
             key: 'action',
-            render: (text: string, record: EmployeeInfo) => (
+            render: (_: string, record: EmployeeInfo) => (
                 <span>
                     <Button
                         size="small"
                         icon={<EditOutlined />}
-                        onClick={() => {
-                            handleUpdate(record)
-                        }}
+                        onClick={() => handleUpdate(record)}
                     >
                         编辑
                     </Button>
                     <Divider type="vertical" />
                     <Popconfirm
                         title={`确定删除 ${record.name} 吗？`}
-                        onConfirm={() => {
-                            handleDelete({ id: record.id })
-                        }}
+                        onConfirm={() => handleDelete({ id: record.id })}
                     >
                         <Button size="small" icon={<DeleteOutlined/>} danger>
                             删除
