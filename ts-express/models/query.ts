@@ -1,25 +1,26 @@
-import mysql from 'mysql';
-import dbConfig from '../config/db';
+import mysql from 'mysql2'
+import dbConfig from '../config/db'
 
-const pool = mysql.createPool(dbConfig);
+const pool = mysql.createPool(dbConfig)
 
 const query = (sql: string) => {
     return new Promise<any>((resolve, reject) => {
         pool.getConnection((error, connection) => {
             if (error) {
-                reject(error);
+                console.error(error)
+                reject(error)
             } else {
                 connection.query(sql, (error, results) => {
                     if (error) {
-                        reject(error);
+                        reject(error)
                     } else {
-                        resolve(results);
+                        resolve(results)
                     }
-                    connection.release();
+                    connection.release()
                 })
             }
-        });
-    });
-};
+        })
+    })
+}
 
-export default query;
+export default query
