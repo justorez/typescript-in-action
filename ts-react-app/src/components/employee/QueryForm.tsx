@@ -34,7 +34,13 @@ const QueryFormHooks = (props: Props) => {
         props.onDataChange(res.data)
     }
 
-    // 页面初始化，查询数据
+    /**
+     * 开发环境下，使用 StrictMode 会让 Effect 执行两次，其目的是让开发者发现隐藏的逻辑错误。
+     * 生产环境下无此问题，所以无需修改
+     * https://zh-hans.react.dev/reference/react/StrictMode#fixing-bugs-found-by-re-running-effects-in-development
+     * 
+     * 页面初始化，查询数据
+     */
     useEffect(() => {
         queryEmployee({name, departmentId});
     }, [])

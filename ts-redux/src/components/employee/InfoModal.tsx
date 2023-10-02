@@ -1,6 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Modal, Form, Input, Select, DatePicker } from 'antd';
 import type { FormProps } from 'antd';
+import type { FormInstance } from 'antd/es/form';
 import dayjs from 'dayjs';
 import _ from 'lodash';
 
@@ -13,8 +14,8 @@ interface Props extends FormProps {
     edit: boolean;
     rowData: Partial<EmployeeInfo>;
     hide(): void;
-    createData(param: CreateRequest, callback: () => void): void;
-    updateData(param: UpdateRequest, callback: () => void): void;
+    createData(param: CreateRequest): Promise<any>;
+    updateData(param: UpdateRequest): Promise<any>;
 }
 
 interface State {
@@ -25,21 +26,24 @@ class InfoModal extends Component<Props, State> {
     state: State = {
         confirmLoading: false
     }
+    formRef = React.createRef<FormInstance>()
+
     handleOk = async () => {
-        await this.props.form?.validateFields();
+        await this.formRef.current?.validateFields();
         this.setState({
             confirmLoading: true
         });
 
-        let param = this.props.form?.getFieldsValue();
+        let param = this.formRef.current?.getFieldsValue();
         param.hiredate = param.hiredate.format('YYYY-MM-DD');
 
         if (!this.props.edit) {
-            this.props.createData(param as CreateRequest, this.close);
+            await this.props.createData(param as CreateRequest);
         } else {
             param.id = this.props.rowData.id;
-            this.props.updateData(param as UpdateRequest, this.close);
+            await this.props.updateData(param as UpdateRequest);
         }
+        this.close();
     }
     handleCancel = () => {
         this.close();
@@ -50,10 +54,11 @@ class InfoModal extends Component<Props, State> {
             confirmLoading: false
         });
     }
+
     render() {
         const title = this.props.edit ? '编辑' : '添加新员工'
         const rowData = _.omit(this.props.rowData, ['hiredate'])
-        const hiredate = this.props.rowData.hiredate
+        const hiredate = this.props.rowData?.hiredate
         
         return (
             <Modal
@@ -64,7 +69,7 @@ class InfoModal extends Component<Props, State> {
                 confirmLoading={this.state.confirmLoading}
                 destroyOnClose={true}
             >
-                <Form preserve={false} initialValues={rowData}>
+                <Form ref={this.formRef} preserve={false} initialValues={rowData}>
                     <Form.Item
                         name="name"
                         rules={[{ required: true, whitespace: true, message: '请输入姓名' }]}
