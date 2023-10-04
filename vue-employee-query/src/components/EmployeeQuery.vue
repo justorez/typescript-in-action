@@ -16,31 +16,81 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-@Component
-export default class EmployeeQuery extends Vue {
-    @Prop({ type: String, default: '' })
-    name!: string
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
-    @Prop({ type: Number, default: 0 })
-    selected!: number
-
-    @Prop({
-        type: Array,
-        default: () => []
-    })
-    department!: { department: string, departmentId: number }[]
-
-    tempName: string = this.name
-    tempSelected: number = this.selected
-
-    query() {
-        this.$emit('query', {
-            name: this.tempName,
-            departmentId: this.tempSelected
-        })
-    }
+interface Department {
+    department: string
+    departmentId: number
 }
+
+interface QueryParams {
+    name: string
+    departmentId: number
+}
+
+export default defineComponent({
+    props: {
+        name: {
+            type: String,
+            default: ''
+        },
+        selected: {
+            type: Number,
+            default: 0
+        },
+        department: {
+            type: Array as PropType<Department[]>,
+            default: () => []
+        }
+    },
+    emits: {
+        query: (payload: QueryParams) => {
+            // 执行运行时校验
+            // return payload.departmentId >= 0 
+        }
+    },
+    data() {
+        return {
+            tempName: this.name,
+            tempSelected: this.selected
+        }
+    },
+    methods: {
+        query() {
+            this.$emit('query', {
+                name: this.tempName,
+                departmentId: this.tempSelected
+            })
+        }
+    }
+})
+
+// import { Vue, Component, Prop } from 'vue-property-decorator'
+// @Component
+// export default class EmployeeQuery extends Vue {
+//     @Prop({ type: String, default: '' })
+//     name!: string
+
+//     @Prop({ type: Number, default: 0 })
+//     selected!: number
+
+//     @Prop({
+//         type: Array,
+//         default: () => []
+//     })
+//     department!: { department: string, departmentId: number }[]
+
+//     tempName: string = this.name
+//     tempSelected: number = this.selected
+
+//     query() {
+//         this.$emit('query', {
+//             name: this.tempName,
+//             departmentId: this.tempSelected
+//         })
+//     }
+// }
 </script>
 
 <style scoped>
